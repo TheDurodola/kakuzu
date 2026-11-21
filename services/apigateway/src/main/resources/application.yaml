@@ -1,0 +1,63 @@
+spring:
+  application:
+    name: apigateway
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: auth-service
+              uri: ${AUTH_SERVICE_URL:http://localhost:8081}
+              predicates:
+                - Path=/auth/**
+              filters:
+                - StripPrefix=1
+                - PrefixPath=/api
+
+            - id: account-service
+              uri: ${ACCOUNT_SERVICE_URL:http://localhost:8082}
+              predicates:
+                - Path=/account/**
+              filters:
+                - StripPrefix=1
+                - PrefixPath=/api
+
+            - id: ledger-service
+              uri: ${LEDGER_SERVICE_URL:http://localhost:8083}
+              predicates:
+                - Path=/ledger/**
+              filters:
+                - StripPrefix=1
+                - PrefixPath=/api
+
+            - id: reporting-service
+              uri: ${REPORTING_SERVICE_URL:http://localhost:8084}
+              predicates:
+                - Path=/reporting/**
+              filters:
+                - StripPrefix=1
+                - PrefixPath=/api
+
+            - id: webhook-service
+              uri: ${WEBHOOK_SERVICE_URL:http://localhost:8085}
+              predicates:
+                - Path=/webhook/**
+              filters:
+                - StripPrefix=1
+                - PrefixPath=/api
+
+            - id: reconciliation-service
+              uri: ${RECONCILIATION_SERVICE_URL:http://localhost:8086}
+              predicates:
+                - Path=/reconciliation/**
+              filters:
+                - StripPrefix=1
+                - PrefixPath=/api
+
+            - id: transfer-service
+              uri: ${TRANSFER_SERVICE_URL:http://localhost:8087}
+              predicates:
+                - Path=/transfer/**
+              filters:
+                - StripPrefix=1
+                - PrefixPath=/api
